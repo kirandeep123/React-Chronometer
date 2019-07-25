@@ -20,19 +20,17 @@ export default function ContainedButtons(props) {
     var interval ;
      const start =() =>{
      interval=  setInterval(() => {
-         (ss<10)? setSS('0'+ (ss++)): setSS(ss++);
-         (mm<10)? setMM('0'+ mm): setMM(mm);
-         (hh<10)? setHh('0'+ (hh)): setHh(hh);
-
+        
+            setSS(ss++);
             if(ss>59){
-          (mm<10)? setMM('0'+ (++mm)) :setMM(++mm);
-            ss=0;
-        }
-        if(mm>59){
-          (hh<10) ?  setHh('0'+ (++hh)):setHh(++hh);
+                setMM(++mm)
+                ss=0;
+            }
+            if(mm>59){
+            setHh(++hh)
             mm=0;
         }
-    }, 1000);
+    }, 100);
     localStorage.setItem("interval_id",interval);
     }
    
@@ -47,13 +45,12 @@ export default function ContainedButtons(props) {
         setSS(0);
         setMM(0);
         setHh(0);
-        console.log("reseting in func")
 
     }
   return (
     <div>
 
-      <div className="timer">{hh}:{mm}:{ss}</div>
+      <div className="timer">{ (hh<10) ?'0'+hh:hh}:{ (mm<10)?'0'+mm:mm}:{(ss<10)?'0'+ss:ss}</div>
 
       <Button variant="contained" color="primary" className={classes.button} onClick={ () => start()}>
         Start
