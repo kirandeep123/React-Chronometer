@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState}from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
@@ -12,14 +12,29 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function ContainedButtons(props) {
-  const classes = useStyles();
-   const start =(timer) =>{
-       setInterval(() => {
-          timer.ss = timer.ss+1;
-          
+    
+    let [hh,setHh] =useState(0);
+    let [mm,setMM] =useState(0);
+    let [ss,setSS] = useState(0);
+    const classes = useStyles();
+    
+     const start =() =>{
+     var interval =  setInterval(() => {
+        setSS(ss++);
+        if(ss==10){
+            console.log(ss);
+            setMM(mm++)
+            ss=0;
+        }
+        if(mm==4){
+            setHh(hh++);
+        }
+        
+        
        }, 1000);
-        console.log(timer.ss)
+       
     }
+   
 
     const stop =() =>{
         console.log("stopping in func")
@@ -30,8 +45,10 @@ export default function ContainedButtons(props) {
     }
   return (
     <div>
-        
-      <Button variant="contained" color="primary" className={classes.button} onClick={ () => start(props.timer)}>
+
+      <div className="timer">{hh}:{mm}:{ss}</div>
+
+      <Button variant="contained" color="primary" className={classes.button} onClick={ () => start()}>
         Start
       </Button>
          

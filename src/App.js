@@ -21,28 +21,19 @@ function MadeWithLove() {
 
 class App extends React.Component {
 
-  constructor(){
-    super();
-    this.state ={
-        hh:0,
-        mm:0,
-        ss:0
-    }
-  }
-  
- 
-  render(){
+
+render(){
   
   return (
     <Container maxWidth="sm">
       <Box my={4}>
-        <Typography variant="h4" component="h1" gutterBottom>
+        <Typography variant="h2" component="h1" gutterBottom>
           React Chronometer
         </Typography>
         <ProTip />
-        <div className="timer">{this.state.hh}:{this.state.mm}:{this.state.ss}</div>
-
-        <ContainedButtons timer={this.state} id="buttons"/>
+        <div className="container-box" >
+        <ContainedButtons id="buttons"/>
+        </div>
       </Box>
     </Container>
   );
