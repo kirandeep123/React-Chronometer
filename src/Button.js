@@ -17,31 +17,38 @@ export default function ContainedButtons(props) {
     let [mm,setMM] =useState(0);
     let [ss,setSS] = useState(0);
     const classes = useStyles();
-    
+    var interval ;
      const start =() =>{
-     var interval =  setInterval(() => {
-        setSS(ss++);
-        if(ss==10){
-            console.log(ss);
-            setMM(mm++)
+     interval=  setInterval(() => {
+         (ss<10)? setSS('0'+ (ss++)): setSS(ss++);
+         (mm<10)? setMM('0'+ mm): setMM(mm);
+         (hh<10)? setHh('0'+ (hh)): setHh(hh);
+
+            if(ss>59){
+          (mm<10)? setMM('0'+ (++mm)) :setMM(++mm);
             ss=0;
         }
-        if(mm==4){
-            setHh(hh++);
+        if(mm>59){
+          (hh<10) ?  setHh('0'+ (++hh)):setHh(++hh);
+            mm=0;
         }
-        
-        
-       }, 1000);
-       
+    }, 1000);
+    localStorage.setItem("interval_id",interval);
     }
    
 
     const stop =() =>{
-        console.log("stopping in func")
+        clearInterval(localStorage.getItem("interval_id"))
+
     }
 
     const reset =() =>{
+        
+        setSS(0);
+        setMM(0);
+        setHh(0);
         console.log("reseting in func")
+
     }
   return (
     <div>
